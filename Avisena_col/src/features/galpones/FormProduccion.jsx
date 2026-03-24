@@ -1,8 +1,8 @@
 export default function FormProduccion() {
   return (
-    <div>
+    <section>
       <h1>FormProduccion</h1>
-    </div>
+    </section>
   )
 }
 

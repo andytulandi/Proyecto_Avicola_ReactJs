@@ -1,8 +1,8 @@
 export default function Nav() {
   return (
-    <div>
+    <section>
       <h1>Nav</h1>
-    </div>
+    </section>
   )
 }
 

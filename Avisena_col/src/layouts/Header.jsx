@@ -1,9 +1,9 @@
 
 export default function Header() {
   return (
-    <div>
+    <section>
       <h1>Header</h1>
-    </div>
+    </section>
   )
 }
 

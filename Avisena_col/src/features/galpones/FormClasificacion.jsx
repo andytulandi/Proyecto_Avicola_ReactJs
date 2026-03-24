@@ -1,8 +1,8 @@
 export default function FormClasificacion() {
   return (
-    <div>
+    <section>
       <h1>FormClasificacion</h1>
-    </div>
+    </section>
   )
 }
 

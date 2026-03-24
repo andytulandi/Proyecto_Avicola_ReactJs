@@ -1,8 +1,8 @@
 export default function UserManagementView() {
   return (
-    <div>
+    <section>
       <h1>UserManagementView</h1>
-    </div>
+    </section>
   )
 }
 

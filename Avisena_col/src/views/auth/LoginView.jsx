@@ -1,8 +1,8 @@
 export default function LoginView() {
   return (
-    <div>
+    <section>
       <h1>Hola mundo</h1>
-    </div>
+    </section>
   )
 }
 

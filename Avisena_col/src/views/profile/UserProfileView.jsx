@@ -1,8 +1,8 @@
 export default function UserProfileView() {
   return (
-    <div>
+    <section>
       <h1>UserProfileView</h1>
-    </div>
+    </section>
   )
 }
 

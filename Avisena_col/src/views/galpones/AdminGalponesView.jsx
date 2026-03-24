@@ -1,8 +1,8 @@
 export default function AdminGalponesView() {
   return (
-    <div>
+    <section>
       <h1>AdminGalponesView</h1>
-    </div>
+    </section>
   )
 }
 
