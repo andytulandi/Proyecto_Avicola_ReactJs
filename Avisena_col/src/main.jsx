@@ -7,7 +7,7 @@ import RegisterUserView from './views/users/RegisterUserView.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Iniciosesion />
-    <RegisterUserView />
+   <App/>
+   
   </StrictMode>,
 )
