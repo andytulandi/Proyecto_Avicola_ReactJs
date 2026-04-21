@@ -1,8 +1,8 @@
 export default function DashboardHome() {
   return (
-    <div>
+    <section>
       <h1>DashboardHome</h1>
-    </div>
+    </section>
   )
 }
 
