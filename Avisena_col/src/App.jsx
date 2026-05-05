@@ -6,15 +6,18 @@ import AdminGalponesView from './views/galpones/AdminGalponesView';
 import UserManagementView from './views/users/UserManagementView';
 import RegisterUserView from './views/users/RegisterUserView';
 import UserProfileView from './views/profile/UserProfileView';
+import Home from './views/auth/Home';
 import './App.css';
+import Iniciosesion from './views/users/Iniciosesion';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/login" element={<LoginView />} />
-        <Route path="/register" element={<RegisterView />} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
+        <Route path="/home" element={<Home  />} />
+        <Route path="/login" element={<Iniciosesion />} />
+        <Route path="/register" element={<RegisterUserView />} />
         <Route path="/dashboard" element={<DashboardHome />} />
         <Route path="/galpones" element={<AdminGalponesView />} />
         <Route path="/users" element={<UserManagementView />} />

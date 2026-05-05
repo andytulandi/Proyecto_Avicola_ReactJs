@@ -8,6 +8,8 @@ import Header from './layouts/Header.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+   <App/>
+   
     <PerfilyConfiguracionview/>
   </StrictMode>,
 )
