@@ -13,5 +13,8 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Iniciosesion/>
     <RegisterUserView/>
+   <App/>
+   
+    <PerfilyConfiguracionview/>
   </StrictMode>,
 )
