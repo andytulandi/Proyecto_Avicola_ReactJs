@@ -111,6 +111,7 @@ export default function FormGestionUsuarios({
              
               <label className="form-label">Teléfono</label>
               <input
+                type='tel'
                 placeholder="Digite el número de celular"
                 className="form-input col-span-2 "
                 value={telefono}
@@ -119,6 +120,7 @@ export default function FormGestionUsuarios({
               
               <label className="form-label">Documento</label>
               <input
+              type='text'
                 placeholder="Ingrese el documento de identidad"
                 className="form-input col-span-2 "
                 value={documento}
