@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import '../../assets/css/gestionusuarios.css';
+
 
 export default function UserManagementView() {
   const [showModal, setShowModal] = useState(false);

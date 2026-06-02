@@ -13,7 +13,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import logoSena from '../assets/images/logo-sena-verde-complementario-svg-2022.svg';
-import '../assets/css/menucolapsable.css';
+
 
 export default function DashboardLayout() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -97,49 +97,49 @@ export default function DashboardLayout() {
   }, [userId]);
 
   return (
-    <section className="app-container dashboard-body">
+    <section className="flex h-screen w-full overflow-hidden bg-[#f6f8f6] dark:bg-[#070a14] text-slate-900 dark:text-[#eff1f5] font-sans">
       {/* SIDEBAR */}
-      <aside className={`sidebar sidebar-transition ${isSidebarCollapsed ? 'is-collapsed' : ''}`}>
-        <section className="sidebar-top">
-          <button onClick={toggleSidebar} className="sidebar-toggle-btn">
-            <Lock className="icon-lock" />
+      <aside className={`bg-white dark:bg-[#0d121e] border-r border-slate-200 dark:border-[#1c2a44] flex flex-col justify-between shrink-0 relative shadow-sm z-40 transition-[width] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group/sidebar ${isSidebarCollapsed ? 'w-[75px] hover:w-72 hover:shadow-[10px_0_15px_rgba(0,0,0,0.05)]' : 'w-72'}`}>
+        <section className="flex flex-col gap-8 p-4 overflow-y-auto overflow-x-hidden">
+          <button onClick={toggleSidebar} className="absolute -right-3 top-9 bg-white dark:bg-[#0d121e] border border-slate-200 dark:border-[#1c2a44] p-1.5 rounded-full shadow-md z-[100] transition-transform duration-200 cursor-pointer hover:scale-110 flex items-center justify-center">
+            <Lock className="w-4 h-4 text-slate-600 dark:text-slate-300" />
           </button>
 
-          <header className="brand-header">
-            <figure className="brand-logo-container">
+          <header className="flex items-center gap-3 px-2 overflow-hidden">
+            <figure className="p-2 bg-[#5be830]/10 dark:bg-[#5be830]/20 rounded-xl shrink-0">
               <img
                 src={logoSena}
                 alt="SENA"
-                className="brand-logo"
+                className="w-8 h-8"
               />
             </figure>
-            <hgroup className="brand-text-group">
-              <h1 className="brand-title">AVISENA</h1>
-              <p className="brand-subtitle user-role-display">{currentUser.role}</p>
+            <hgroup className={`transition-opacity duration-200 brand-text-group ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`}>
+              <h1 className="text-xl font-black uppercase leading-none whitespace-nowrap">AVISENA</h1>
+              <p className="text-[10px] font-bold text-primary uppercase mt-1 tracking-tighter">{currentUser.role}</p>
             </hgroup>
           </header>
 
-          <nav className="main-navigation">
-            <Link to="/users" className="nav-item">
-              <Users className="icon-nav" />
-              <span className="nav-text">Gestión de Usuarios</span>
+          <nav className="flex flex-col gap-1">
+            <Link to="/users" className={`flex items-center gap-4 py-2.5 px-4 rounded-lg text-slate-600 dark:text-[#becbb3] hover:bg-[#f1f5f9] dark:hover:bg-[#162035] hover:text-slate-900 dark:hover:text-white transition-all duration-200 w-full cursor-pointer box-border no-underline ${isSidebarCollapsed ? 'justify-center py-2.5 px-0 group-hover/sidebar:justify-start group-hover/sidebar:px-4' : ''}`}>
+              <Users className="w-5 h-5 shrink-0" />
+              <span className={`transition-opacity duration-200 whitespace-nowrap ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`}>Gestión de Usuarios</span>
             </Link>
 
             <section className="dropdown-container">
               <button
                 onClick={() => toggleDropdown('registros')}
-                className="nav-item dropdown-trigger"
+                className={`flex items-center gap-4 py-2.5 px-4 rounded-lg text-slate-600 dark:text-[#becbb3] hover:bg-[#f1f5f9] dark:hover:bg-[#162035] hover:text-slate-900 dark:hover:text-white transition-all duration-200 w-full cursor-pointer box-border no-underline bg-transparent border-none ${isSidebarCollapsed ? 'justify-center py-2.5 px-0 group-hover/sidebar:justify-start group-hover/sidebar:px-4' : ''}`}
               >
-                <ClipboardList className="icon-nav" />
-                <span className="nav-text flex-1 text-left">Registros</span>
-                <ChevronDown className={`chevron-icon ${openDropdown === 'registros' ? 'rotate-180' : ''}`} />
+                <ClipboardList className="w-5 h-5 shrink-0" />
+                <span className={`flex-1 text-left transition-opacity duration-200 whitespace-nowrap ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`}>Registros</span>
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 shrink-0 ${openDropdown === 'registros' ? 'rotate-180' : ''} ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`} />
               </button>
               {openDropdown === 'registros' && (
-                <nav className="submenu active">
-                  <Link to="/prodfunfinal" className="submenu-item">Producción Diaria</Link>
-                  <Link to="/registro_clasificacion" className="submenu-item">Clasificación Huevos</Link>
-                  <Link to="/mortalidad" className="submenu-item">Mortalidad</Link>
-                  <Link to="/morbilidad" className="submenu-item">Morbilidad</Link>
+                <nav className={`flex flex-col gap-2 py-2 pl-13 transition-opacity duration-200 ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`}>
+                  <Link to="/prodfunfinal" className="text-[12px] font-medium text-[#64748b] dark:text-[#becbb3] text-left no-underline transition-colors duration-200 hover:text-primary">Producción Diaria</Link>
+                  <Link to="/registro_clasificacion" className="text-[12px] font-medium text-[#64748b] dark:text-[#becbb3] text-left no-underline transition-colors duration-200 hover:text-primary">Clasificación Huevos</Link>
+                  <Link to="/mortalidad" className="text-[12px] font-medium text-[#64748b] dark:text-[#becbb3] text-left no-underline transition-colors duration-200 hover:text-primary">Mortalidad</Link>
+                  <Link to="/morbilidad" className="text-[12px] font-medium text-[#64748b] dark:text-[#becbb3] text-left no-underline transition-colors duration-200 hover:text-primary">Morbilidad</Link>
                 </nav>
               )}
             </section>
@@ -147,25 +147,25 @@ export default function DashboardLayout() {
             <section className="dropdown-container">
               <button
                 onClick={() => toggleDropdown('reportes')}
-                className="nav-item dropdown-trigger"
+                className={`flex items-center gap-4 py-2.5 px-4 rounded-lg text-slate-600 dark:text-[#becbb3] hover:bg-[#f1f5f9] dark:hover:bg-[#162035] hover:text-slate-900 dark:hover:text-white transition-all duration-200 w-full cursor-pointer box-border no-underline bg-transparent border-none ${isSidebarCollapsed ? 'justify-center py-2.5 px-0 group-hover/sidebar:justify-start group-hover/sidebar:px-4' : ''}`}
               >
-                <FileText className="icon-nav" />
-                <span className="nav-text flex-1 text-left">Reportes</span>
-                <ChevronDown className={`chevron-icon ${openDropdown === 'reportes' ? 'rotate-180' : ''}`} />
+                <FileText className="w-5 h-5 shrink-0" />
+                <span className={`flex-1 text-left transition-opacity duration-200 whitespace-nowrap ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`}>Reportes</span>
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 shrink-0 ${openDropdown === 'reportes' ? 'rotate-180' : ''} ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`} />
               </button>
               {openDropdown === 'reportes' && (
-                <nav className="submenu active">
-                  <Link to="/rep_diario" className="submenu-item">Producción Diaria</Link>
-                  <Link to="/rep_alimento" className="submenu-item">Consumo Alimento</Link>
-                  <Link to="/rep_mortalidad" className="submenu-item">Mortalidad Aves</Link>
-                  <Link to="/rep_finanzas" className="submenu-item">Finanzas Granja</Link>
+                <nav className={`flex flex-col gap-2 py-2 pl-13 transition-opacity duration-200 ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`}>
+                  <Link to="/rep_diario" className="text-[12px] font-medium text-[#64748b] dark:text-[#becbb3] text-left no-underline transition-colors duration-200 hover:text-primary">Producción Diaria</Link>
+                  <Link to="/rep_alimento" className="text-[12px] font-medium text-[#64748b] dark:text-[#becbb3] text-left no-underline transition-colors duration-200 hover:text-primary">Consumo Alimento</Link>
+                  <Link to="/rep_mortalidad" className="text-[12px] font-medium text-[#64748b] dark:text-[#becbb3] text-left no-underline transition-colors duration-200 hover:text-primary">Mortalidad Aves</Link>
+                  <Link to="/rep_finanzas" className="text-[12px] font-medium text-[#64748b] dark:text-[#becbb3] text-left no-underline transition-colors duration-200 hover:text-primary">Finanzas Granja</Link>
                 </nav>
               )}
             </section>
 
-            <Link to="/notificaciones" className="nav-item">
-              <Bell className="icon-nav" />
-              <span className="nav-text">Notificaciones</span>
+            <Link to="/notificaciones" className={`flex items-center gap-4 py-2.5 px-4 rounded-lg text-slate-600 dark:text-[#becbb3] hover:bg-[#f1f5f9] dark:hover:bg-[#162035] hover:text-slate-900 dark:hover:text-white transition-all duration-200 w-full cursor-pointer box-border no-underline ${isSidebarCollapsed ? 'justify-center py-2.5 px-0 group-hover/sidebar:justify-start group-hover/sidebar:px-4' : ''}`}>
+              <Bell className="w-5 h-5 shrink-0" />
+              <span className={`transition-opacity duration-200 whitespace-nowrap ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`}>Notificaciones</span>
             </Link>
           </nav>
         </section>
@@ -175,9 +175,9 @@ export default function DashboardLayout() {
       </aside>
 
       {/* MAIN CONTENT WRAPPER */}
-      <main className="content-wrapper">
-        <header className="top-bar">
-          <h2 className="page-title">Dashboard</h2>
+      <main className="flex-1 flex flex-col min-w-0 bg-[#f6f8f6] dark:bg-[#070a14] overflow-hidden">
+        <header className="flex items-center justify-between py-4 px-8 bg-white dark:bg-[#0d121e] border-b border-slate-200 dark:border-[#1c2a44] sticky top-0 z-30 shadow-sm">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-[#eff1f5]">Dashboard</h2>
           <article className="user-meta relative">
             <section className="user-details flex items-center gap-3">
               <div className="text-right hidden sm:block">
@@ -275,7 +275,7 @@ export default function DashboardLayout() {
         </header>
 
         {/* MAIN VIEW FOR ROUTING */}
-        <section id="main-view" className="view-container fade-in">
+        <section id="main-view" className="flex-1 overflow-y-auto p-8 animate-[fadeIn_0.3s_ease-in-out]">
           <Outlet />
         </section>
       </main>

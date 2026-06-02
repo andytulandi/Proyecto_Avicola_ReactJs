@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import FormTratamiento from '../../features/galpones/FormTratamiento';
-import '../../assets/css/tratamiento.css';
+
 
 export default function TratamientoView() {
   const [tratamientos, setTratamientos] = useState([]);

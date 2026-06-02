@@ -14,7 +14,7 @@ import {
   X,
   Printer
 } from 'lucide-react';
-import '../../assets/css/produccion.css';
+
 
 export default function ProduccionDiariaView() {
   const [showModal, setShowModal] = useState(false);

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormMorbilidad from '../../features/galpones/FormMorbilidad';
-import '../../assets/css/morbilidad.css';
 
 export default function MorbilidadView() {
   const [showModal, setShowModal] = useState(false);
@@ -117,9 +116,9 @@ export default function MorbilidadView() {
   };
 
   return (
-    <section className="layout-container">
-      <main className="main-container w-full">
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 align-button">
+    <section className="flex h-full grow flex-col">
+      <main className="flex flex-1 flex-col py-8 px-4 md:px-10 lg:px-20 xl:px-40 w-full">
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 justify-between">
           <section className="lg:col-span-2 text-left">
             <h2 className="text-3xl font-bold mb-2">Registro de Morbilidad y Causas</h2>
             <p className="text-slate-500 dark:text-slate-400">Control y seguimiento de síntomas en aves.</p>

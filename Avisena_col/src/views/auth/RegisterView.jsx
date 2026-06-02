@@ -22,9 +22,9 @@ export default function RegisterView() {
     <div className="bg-[#f5faf6] min-h-screen font-['Inter']">
       <header className="w-full bg-white shadow-sm">
         <nav className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <section className="flex items-center gap-1">
+          <section className="flex items-center gap-3">
             <img src="./assets/images/logo-sena-verde-complementario-svg-2022.svg" className="w-9 h-9 " alt="Logo" />
-            <strong className="text-2xl font-extrabold uppercase text-[#0B5D3B] tracking-wide">AVISENA COL</strong>
+            <strong className="text-2xl font-extrabold uppercase text-black tracking-wide">AVISENA COL</strong>
           </section>
         </nav>
       </header>
@@ -82,7 +82,7 @@ export default function RegisterView() {
                   value={formData.documento}
                   onChange={(e) => setFormData({ ...formData, documento: e.target.value })}
                   required
-                  className="w-full rounded-xl border-none bg-[#eff6ff] px-4 py-3 focus:ring-2 focus:ring-green-400 outline-none font-medium"
+                  className="w-full rounded-xl border border-gray-200 px-4 py-3 focus:ring-2 focus:ring-green-400 outline-none font-medium"
                 />
               </label>
             </section>
@@ -95,7 +95,7 @@ export default function RegisterView() {
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 required
                 placeholder="Mínimo 10 caracteres y un caracter especial"
-                className="w-full rounded-xl border-none bg-[#eff6ff] px-4 py-3 focus:ring-2 focus:ring-green-400 outline-none"
+                className="w-full rounded-xl border border-gray-200 px-4 py-3 focus:ring-2 focus:ring-green-400 outline-none"
               />
             </label>
 
@@ -105,7 +105,7 @@ export default function RegisterView() {
             </button>
 
             <p className="text-center text-sm text-gray-500">
-              ¿Ya tienes una cuenta? <Link to="/login" className="text-green-600 font-bold hover:underline">Inicia sesión</Link>
+              ¿Ya tienes una cuenta? <Link to="/login" className="text-[#49e619] font-bold hover:underline">Inicia sesión</Link>
             </p>
           </form>
         </article>

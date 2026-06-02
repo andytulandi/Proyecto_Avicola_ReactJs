@@ -23,6 +23,7 @@ export default function Forminiciosesion() {
     const togglePassword = () => {
         setShowPassword(!showPassword);
     };
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     return (
         <div className=" bg-background-light dark:bg-background-dark font-display text-[#111b0e] dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
@@ -49,7 +50,7 @@ export default function Forminiciosesion() {
                             Bienvenido
                         </h1>
                         <p className="text-slate-500 dark:text-slate-400 text-base mt-2">
-                            Gestiona tu producción en <span className="text-emerald-600 font-bold">AVISENA COL</span>.
+                            Gestiona tu producción en <span className="text-[#49e619] font-bold">AVISENA COL</span>.
                         </p>
                     </header>
 
@@ -98,18 +99,25 @@ export default function Forminiciosesion() {
                                     type="button"
                                     className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-600 text-xl focus:outline-none cursor-pointer"
                                 >
-                                    {showPassword ? '👁️' : '🙈'}
+                                    <span className="material-symbols-outlined text-base select-none">
+                                    {showPassword ? "visibility_off" : "visibility"}
+                                </span>
                                 </button>
                             </aside>
                         </section>
 
                         <button
                             type="submit"
-                            className="flex items-center justify-center w-full bg-primary hover:bg-[#3dbd14] text-white font-black py-4 rounded-xl shadow-lg shadow-emerald-500/20 transition-all active:scale-[0.98] mb-5 uppercase tracking-wide cursor-pointer"
+                            className="flex items-center justify-center w-full bg-primary hover:bg-[#3dbd14] text-black font-black py-4 rounded-xl shadow-lg shadow-emerald-500/20 transition-all active:scale-[0.98] mb-5 uppercase tracking-wide cursor-pointer"
                         >
                             Iniciar Sesión
                         </button>
 
+                    <section className="flex items-center py-4 md:py-7">
+                                        <hr className="flex-grow border-t border-[#eaf3e7] dark:border-emerald-900/30" />
+                                        <span className="mx-4 text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">o</span>
+                                        <hr className="flex-grow border-t border-[#eaf3e7] dark:border-emerald-900/30 " />
+                    </section>
                         <section className="grid grid-cols-2 gap-4">
                             <button
                                 type="button"
@@ -143,7 +151,7 @@ export default function Forminiciosesion() {
                         <p className="text-slate-500 dark:text-slate-400 text-sm">
                             <Link
                                 to="/forgot-password"
-                                className="text-emerald-600 font-black hover:underline underline-offset-4 ml-1"
+                                className="text-[#49e619] font-black hover:underline underline-offset-4 ml-1"
                             >
                                 ¿olvidaste tu contraseña?
                             </Link>
