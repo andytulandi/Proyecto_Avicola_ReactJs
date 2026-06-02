@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AVISENA - Configuración General</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-error": "#ffffff",
+                "surface": "#f8f9ff",
+                "on-secondary-fixed-variant": "#004f57",
+                "tertiary-fixed": "#94f8a2",
+                "tertiary-container": "#44a65a",
+                "secondary-fixed": "#94f1ff",
+                "on-primary-fixed-variant": "#185200",
+                "primary-container": "#39a900",
+                "surface-bright": "#f8f9ff",
+                "tertiary": "#006e2d",
+                "secondary-fixed-dim": "#69d6e5",
+                "primary-fixed-dim": "#6fdf43",
+                "surface-container-highest": "#d3e4fe",
+                "on-secondary-fixed": "#001f24",
+                "on-surface": "#0b1c30",
+                "primary-fixed": "#8afd5d",
+                "on-secondary": "#ffffff",
+                "inverse-surface": "#213145",
+                "on-tertiary-container": "#003412",
+                "surface-container-low": "#eff4ff",
+                "on-error-container": "#93000a",
+                "surface-container": "#e5eeff",
+                "on-primary-fixed": "#052100",
+                "inverse-on-surface": "#eaf1ff",
+                "error": "#ba1a1a",
+                "surface-container-lowest": "#ffffff",
+                "on-tertiary": "#ffffff",
+                "error-container": "#ffdad6",
+                "on-background": "#0b1c30",
+                "on-secondary-container": "#006d78",
+                "surface-container-high": "#dce9ff",
+                "on-primary-container": "#0c3400",
+                "surface-variant": "#d3e4fe",
+                "outline": "#6f7b66",
+                "on-primary": "#ffffff",
+                "on-tertiary-fixed": "#002109",
+                "primary": "#226d00",
+                "on-tertiary-fixed-variant": "#005320",
+                "surface-tint": "#226d00",
+                "surface-dim": "#cbdbf5",
+                "on-surface-variant": "#3f4a38",
+                "outline-variant": "#becbb3",
+                "tertiary-fixed-dim": "#79db88",
+                "secondary": "#006973",
+                "secondary-container": "#85efff",
+                "inverse-primary": "#6fdf43",
+                "background": "#f8f9ff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "base": "8px",
+                "margin-mobile": "16px",
+                "lg": "24px",
+                "md": "16px",
+                "gutter": "24px",
+                "xl": "32px",
+                "margin-desktop": "40px",
+                "xs": "4px",
+                "sm": "8px"
+            },
+            "fontFamily": {
+                "headline-md": ["Manrope"],
+                "body-lg": ["Inter"],
+                "headline-xl": ["Manrope"],
+                "label-md": ["Inter"],
+                "headline-lg": ["Manrope"],
+                "body-md": ["Inter"],
+                "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+    <script>
+      window.addEventListener('error', function(event) {
+        document.body.innerHTML += '<div style="color:red; padding:20px;"><h1>Error</h1><pre>' + event.error.stack + '</pre></div>';
+      });
+      window.addEventListener('unhandledrejection', function(event) {
+        document.body.innerHTML += '<div style="color:red; padding:20px;"><h1>Unhandled Promise Rejection</h1><pre>' + event.reason + '</pre></div>';
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

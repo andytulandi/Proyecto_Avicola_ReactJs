@@ -1,0 +1,26 @@
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    vertical-align: middle;
+}
+.toggle-checkbox:checked {
+    right: 0;
+    border-color: transparent;
+}
+.toggle-checkbox:checked + .toggle-label {
+    background-color: #39A900;
+}
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #becbb3;
+    border-radius: 10px;
+}
+.glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+}

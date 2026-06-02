@@ -1,13 +1,13 @@
-import { StrictMode } from 'react'
+import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
-import OlvideContraseña1 from './views/auth/OlvideContraseña1.jsx';    
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
-    <OlvideContraseña1 />
-
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>,
-)
+)  
