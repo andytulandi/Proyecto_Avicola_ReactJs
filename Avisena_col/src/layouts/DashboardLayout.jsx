@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { Outlet, Link, NavLink, useNavigate, useLocation} from 'react-router-dom';
 import {
   Lock,
   Users,
@@ -16,6 +16,20 @@ import logoSena from '../assets/images/logo-sena-verde-complementario-svg-2022.s
 
 
 export default function DashboardLayout() {
+  const location = useLocation();
+  const pageTitles = {
+  '/users': 'Gestión de Usuarios',
+  '/prodfunfinal': 'Producción Diaria',
+  '/registro_clasificacion': 'Clasificación de Huevos',
+  '/mortalidad': 'Mortalidad',
+  '/morbilidad': 'Morbilidad',
+  '/rep_diario': 'Reporte Producción Diaria',
+  '/rep_alimento': 'Reporte Consumo de Alimento',
+  '/rep_mortalidad': 'Reporte Mortalidad',
+  '/rep_finanzas': 'Reporte Finanzas',
+  '/profile': 'Mi Perfil',
+  '/notificaciones': 'Notificaciones'
+};
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -120,10 +134,10 @@ export default function DashboardLayout() {
           </header>
 
           <nav className="flex flex-col gap-1">
-            <Link to="/users" className={`flex items-center gap-4 py-2.5 px-4 rounded-lg text-slate-600 dark:text-[#becbb3] hover:bg-[#f1f5f9] dark:hover:bg-[#162035] hover:text-slate-900 dark:hover:text-white transition-all duration-200 w-full cursor-pointer box-border no-underline ${isSidebarCollapsed ? 'justify-center py-2.5 px-0 group-hover/sidebar:justify-start group-hover/sidebar:px-4' : ''}`}>
+            <NavLink to="/users" className={ ({ isActive }) => `flex items-center gap-4 py-2.5 px-4 rounded-lg text-slate-600 dark:text-[#becbb3] hover:bg-[#f1f5f9] dark:hover:bg-[#162035] hover:text-slate-900 dark:hover:text-white transition-all duration-200 w-full cursor-pointer box-border no-underline ${isSidebarCollapsed ? 'justify-center py-2.5 px-0 group-hover/sidebar:justify-start group-hover/sidebar:px-4' : ''} ${isActive ? 'bg-[#f1f5f9] dark:bg-[#162035] text-[#49e619] dark:text-white ' : ''}`}>
               <Users className="w-5 h-5 shrink-0" />
               <span className={`transition-opacity duration-200 whitespace-nowrap ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`}>Gestión de Usuarios</span>
-            </Link>
+            </NavLink>
 
             <section className="dropdown-container">
               <button
@@ -177,7 +191,7 @@ export default function DashboardLayout() {
       {/* MAIN CONTENT WRAPPER */}
       <main className="flex-1 flex flex-col min-w-0 bg-[#f6f8f6] dark:bg-[#070a14] overflow-hidden">
         <header className="flex items-center justify-between py-4 px-8 bg-white dark:bg-[#0d121e] border-b border-slate-200 dark:border-[#1c2a44] sticky top-0 z-30 shadow-sm">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-[#eff1f5]">Dashboard</h2>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-[#eff1f5]">{pageTitles[location.pathname] || 'Dashboard'}</h2>
           <article className="user-meta relative">
             <section className="user-details flex items-center gap-3">
               <div className="text-right hidden sm:block">
