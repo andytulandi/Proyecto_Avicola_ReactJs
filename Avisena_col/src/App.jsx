@@ -19,6 +19,7 @@ import ReportesDiarioView from './views/reportes/ReportesDiarioView';
 import ReportesAlimentoView from './views/reportes/ReportesAlimentoView';
 import ReportesMortalidadView from './views/reportes/ReportesMortalidadView';
 import ReportesFinanzasView from './views/reportes/ReportesFinanzasView';
+import GestionUsuariosView from './views/dashboard/GestionUsuariosView';
 
 function App() {
   return (
@@ -43,7 +44,7 @@ function App() {
           <Route path="/tratamiento" element={<TratamientoView />} />
           <Route path="/registro_clasificacion" element={<RegistroClasificacionView />} />
           <Route path="/notificaciones" element={<NotificacionesView />} />
-          <Route path="/users" element={<UserManagementView />} />
+          <Route path="/users" element={<GestionUsuariosView />} />
           <Route path="/users/register" element={<RegisterUserView />} />
           <Route path="/profile" element={<UserProfileView />} />
           <Route path="/rep_diario

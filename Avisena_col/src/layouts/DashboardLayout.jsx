@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Outlet, Link, NavLink, useNavigate, useLocation} from 'react-router-dom';
 import {
-  Lock,
+  PanelLeftClose,
+  PanelLeftOpen,
   Users,
   ClipboardList,
   ChevronDown,
@@ -17,6 +18,17 @@ import logoSena from '../assets/images/logo-sena-verde-complementario-svg-2022.s
 
 export default function DashboardLayout() {
   const location = useLocation();
+  
+  const isUsersActive = [
+    '/prodfunfinal',
+  '/registro_clasificacion',
+  '/mortalidad',
+  '/morbilidad'
+  ].includes(location.pathname);
+
+  console.log(location.pathname);
+console.log(isUsersActive);
+  
   const pageTitles = {
   '/users': 'Gestión de Usuarios',
   '/prodfunfinal': 'Producción Diaria',
@@ -48,8 +60,15 @@ export default function DashboardLayout() {
   const toggleSidebar = () => setIsSidebarCollapsed(!isSidebarCollapsed);
 
   const toggleDropdown = (menu) => {
-    setOpenDropdown(openDropdown === menu ? null : menu);
-  };
+  if (isSidebarCollapsed) {
+    setIsSidebarCollapsed(false);
+    return;
+  }
+
+  setOpenDropdown(
+    openDropdown === menu ? null : menu
+  );
+};
 
   const handleLogout = () => {
     localStorage.removeItem('user_token');
@@ -113,13 +132,17 @@ export default function DashboardLayout() {
   return (
     <section className="flex h-screen w-full overflow-hidden bg-[#f6f8f6] dark:bg-[#070a14] text-slate-900 dark:text-[#eff1f5] font-sans">
       {/* SIDEBAR */}
-      <aside className={`bg-white dark:bg-[#0d121e] border-r border-slate-200 dark:border-[#1c2a44] flex flex-col justify-between shrink-0 relative shadow-sm z-40 transition-[width] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group/sidebar ${isSidebarCollapsed ? 'w-[75px] hover:w-72 hover:shadow-[10px_0_15px_rgba(0,0,0,0.05)]' : 'w-72'}`}>
+      <aside className={`bg-white dark:bg-[#0d121e] border-r border-slate-200 dark:border-[#1c2a44] flex flex-col justify-between shrink-0 relative shadow-sm z-40 transition-[width] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group/sidebar ${isSidebarCollapsed ? 'w-20' : 'w-[260px]'}`}>
         <section className="flex flex-col gap-8 p-4 overflow-y-auto overflow-x-hidden">
-          <button onClick={toggleSidebar} className="absolute -right-3 top-9 bg-white dark:bg-[#0d121e] border border-slate-200 dark:border-[#1c2a44] p-1.5 rounded-full shadow-md z-[100] transition-transform duration-200 cursor-pointer hover:scale-110 flex items-center justify-center">
-            <Lock className="w-4 h-4 text-slate-600 dark:text-slate-300" />
+          <button onClick={toggleSidebar} className="absolute -right-4 top-6 w-8 h-8 bg-white dark:bg-[#0d121e] border border-slate-200 dark:border-[#1c2a44] rounded-full shadow flex items-center justify-center z-[100] transition-transform duration-200 cursor-pointer hover:scale-110">
+            {isSidebarCollapsed ? (
+              <PanelLeftOpen className="w-4 h-4 text-slate-600 dark:text-slate-300" />
+            ) : (
+              <PanelLeftClose className="w-4 h-4 text-slate-600 dark:text-slate-300" />
+            )}
           </button>
 
-          <header className="flex items-center gap-3 px-2 overflow-hidden">
+          <header className={`flex items-center gap-3 px-2 overflow-hidden ${isSidebarCollapsed ? 'justify-center' : ''}`}>
             <figure className="p-2 bg-[#5be830]/10 dark:bg-[#5be830]/20 rounded-xl shrink-0">
               <img
                 src={logoSena}
@@ -127,29 +150,30 @@ export default function DashboardLayout() {
                 className="w-8 h-8"
               />
             </figure>
-            <hgroup className={`transition-opacity duration-200 brand-text-group ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`}>
+            <hgroup className={`transition-opacity duration-200 brand-text-group ${isSidebarCollapsed ? 'hidden' : 'block'}`}>
               <h1 className="text-xl font-black uppercase leading-none whitespace-nowrap">AVISENA</h1>
               <p className="text-[10px] font-bold text-primary uppercase mt-1 tracking-tighter">{currentUser.role}</p>
             </hgroup>
           </header>
 
           <nav className="flex flex-col gap-1">
-            <NavLink to="/users" className={ ({ isActive }) => `flex items-center gap-4 py-2.5 px-4 rounded-lg text-slate-600 dark:text-[#becbb3] hover:bg-[#f1f5f9] dark:hover:bg-[#162035] hover:text-slate-900 dark:hover:text-white transition-all duration-200 w-full cursor-pointer box-border no-underline ${isSidebarCollapsed ? 'justify-center py-2.5 px-0 group-hover/sidebar:justify-start group-hover/sidebar:px-4' : ''} ${isActive ? 'bg-[#f1f5f9] dark:bg-[#162035] text-[#49e619] dark:text-white ' : ''}`}>
+            <NavLink to="/users" className={({ isActive }) => `flex items-center h-12 rounded-lg text-slate-600 dark:text-[#becbb3] hover:bg-[#f1f5f9] dark:hover:bg-[#162035] hover:text-slate-900 dark:hover:text-white transition-all duration-200 w-full cursor-pointer box-border no-underline ${isSidebarCollapsed ? 'justify-center px-0' : 'gap-4 px-4'} ${isActive ? 'bg-[#f1f5f9] dark:bg-[#162035] text-[#49e619] dark:text-white' : ''}`}>
               <Users className="w-5 h-5 shrink-0" />
-              <span className={`transition-opacity duration-200 whitespace-nowrap ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`}>Gestión de Usuarios</span>
+              <span className={`transition-opacity duration-200 whitespace-nowrap ${isSidebarCollapsed ? 'hidden' : 'block'}`}>Gestión de Usuarios</span>
             </NavLink>
 
             <section className="dropdown-container">
               <button
+                type="button"
                 onClick={() => toggleDropdown('registros')}
-                className={`flex items-center gap-4 py-2.5 px-4 rounded-lg text-slate-600 dark:text-[#becbb3] hover:bg-[#f1f5f9] dark:hover:bg-[#162035] hover:text-slate-900 dark:hover:text-white transition-all duration-200 w-full cursor-pointer box-border no-underline bg-transparent border-none ${isSidebarCollapsed ? 'justify-center py-2.5 px-0 group-hover/sidebar:justify-start group-hover/sidebar:px-4' : ''}`}
+                className={`flex items-center h-12 rounded-lg text-slate-600 dark:text-[#becbb3] hover:bg-[#f1f5f9] dark:hover:bg-[#162035] hover:text-slate-900 dark:hover:text-white transition-all duration-200 w-full cursor-pointer box-border no-underline bg-transparent border-none ${isSidebarCollapsed ? 'justify-center px-0' : 'gap-4 px-4'} ${isUsersActive ? 'bg-[#f1f5f9] dark:bg-[#162035] text-[#49e619] dark:text-white' : ''}`}
               >
-                <ClipboardList className="w-5 h-5 shrink-0" />
-                <span className={`flex-1 text-left transition-opacity duration-200 whitespace-nowrap ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`}>Registros</span>
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 shrink-0 ${openDropdown === 'registros' ? 'rotate-180' : ''} ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`} />
+                <ClipboardList className={`w-5 h-5 shrink-0 `} />
+                <span className={`flex-1 text-left transition-opacity duration-200 whitespace-nowrap ${isSidebarCollapsed ? 'hidden' : 'block'}`}>Registros</span>
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 shrink-0 ${openDropdown === 'registros' ? 'rotate-180' : ''} ${isSidebarCollapsed ? 'hidden' : 'block'}`} />
               </button>
-              {openDropdown === 'registros' && (
-                <nav className={`flex flex-col gap-2 py-2 pl-13 transition-opacity duration-200 ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`}>
+              {openDropdown === 'registros' && !isSidebarCollapsed && (
+                <nav className="flex flex-col gap-2 py-2 pl-13">
                   <Link to="/prodfunfinal" className="text-[12px] font-medium text-[#64748b] dark:text-[#becbb3] text-left no-underline transition-colors duration-200 hover:text-primary">Producción Diaria</Link>
                   <Link to="/registro_clasificacion" className="text-[12px] font-medium text-[#64748b] dark:text-[#becbb3] text-left no-underline transition-colors duration-200 hover:text-primary">Clasificación Huevos</Link>
                   <Link to="/mortalidad" className="text-[12px] font-medium text-[#64748b] dark:text-[#becbb3] text-left no-underline transition-colors duration-200 hover:text-primary">Mortalidad</Link>
@@ -161,14 +185,14 @@ export default function DashboardLayout() {
             <section className="dropdown-container">
               <button
                 onClick={() => toggleDropdown('reportes')}
-                className={`flex items-center gap-4 py-2.5 px-4 rounded-lg text-slate-600 dark:text-[#becbb3] hover:bg-[#f1f5f9] dark:hover:bg-[#162035] hover:text-slate-900 dark:hover:text-white transition-all duration-200 w-full cursor-pointer box-border no-underline bg-transparent border-none ${isSidebarCollapsed ? 'justify-center py-2.5 px-0 group-hover/sidebar:justify-start group-hover/sidebar:px-4' : ''}`}
+                className={`flex items-center h-12 rounded-lg text-slate-600 dark:text-[#becbb3] hover:bg-[#f1f5f9] dark:hover:bg-[#162035] hover:text-slate-900 dark:hover:text-white transition-all duration-200 w-full cursor-pointer box-border no-underline bg-transparent border-none ${isSidebarCollapsed ? 'justify-center px-0' : 'gap-4 px-4'}`}
               >
                 <FileText className="w-5 h-5 shrink-0" />
-                <span className={`flex-1 text-left transition-opacity duration-200 whitespace-nowrap ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`}>Reportes</span>
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 shrink-0 ${openDropdown === 'reportes' ? 'rotate-180' : ''} ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`} />
+                <span className={`flex-1 text-left transition-opacity duration-200 whitespace-nowrap ${isSidebarCollapsed ? 'hidden' : 'block'}`}>Reportes</span>
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 shrink-0 ${openDropdown === 'reportes' ? 'rotate-180' : ''} ${isSidebarCollapsed ? 'hidden' : 'block'}`} />
               </button>
-              {openDropdown === 'reportes' && (
-                <nav className={`flex flex-col gap-2 py-2 pl-13 transition-opacity duration-200 ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`}>
+              {openDropdown === 'reportes' && !isSidebarCollapsed && (
+                <nav className="flex flex-col gap-2 py-2 pl-13">
                   <Link to="/rep_diario" className="text-[12px] font-medium text-[#64748b] dark:text-[#becbb3] text-left no-underline transition-colors duration-200 hover:text-primary">Producción Diaria</Link>
                   <Link to="/rep_alimento" className="text-[12px] font-medium text-[#64748b] dark:text-[#becbb3] text-left no-underline transition-colors duration-200 hover:text-primary">Consumo Alimento</Link>
                   <Link to="/rep_mortalidad" className="text-[12px] font-medium text-[#64748b] dark:text-[#becbb3] text-left no-underline transition-colors duration-200 hover:text-primary">Mortalidad Aves</Link>
@@ -177,10 +201,10 @@ export default function DashboardLayout() {
               )}
             </section>
 
-            <Link to="/notificaciones" className={`flex items-center gap-4 py-2.5 px-4 rounded-lg text-slate-600 dark:text-[#becbb3] hover:bg-[#f1f5f9] dark:hover:bg-[#162035] hover:text-slate-900 dark:hover:text-white transition-all duration-200 w-full cursor-pointer box-border no-underline ${isSidebarCollapsed ? 'justify-center py-2.5 px-0 group-hover/sidebar:justify-start group-hover/sidebar:px-4' : ''}`}>
+            <NavLink to="/notificaciones" className={({ isActive }) => `flex items-center h-12 rounded-lg text-slate-600 dark:text-[#becbb3] hover:bg-[#f1f5f9] dark:hover:bg-[#162035] hover:text-slate-900 dark:hover:text-white transition-all duration-200 w-full cursor-pointer box-border no-underline ${isSidebarCollapsed ? 'justify-center px-0' : 'gap-4 px-4'} ${isActive ? 'bg-[#f1f5f9] dark:bg-[#162035] text-[#49e619] dark:text-white' : ''}` }>
               <Bell className="w-5 h-5 shrink-0" />
-              <span className={`transition-opacity duration-200 whitespace-nowrap ${isSidebarCollapsed ? 'opacity-0 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:pointer-events-auto' : 'opacity-100'}`}>Notificaciones</span>
-            </Link>
+              <span className={`transition-opacity duration-200 whitespace-nowrap ${isSidebarCollapsed ? 'hidden' : 'block'}`}>Notificaciones</span>
+            </NavLink>
           </nav>
         </section>
         <footer className="sidebar-footer">
