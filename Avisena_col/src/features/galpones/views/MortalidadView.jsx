@@ -53,7 +53,7 @@ export default function MortalidadView() {
                 <h1 className="text-slate-900 text-5xl font-black leading-tight tracking-tight">
                   Mortalidad de las aves
                 </h1>
-                <p className="text-slate-500 text-base">
+                <p className="text-slate-500 text-lg">
                   Registra y gestiona organizadamente los datos relacionados con
                   la mortalidad de las aves, dentro de tu unidad avícola.
                 </p>
@@ -135,7 +135,7 @@ export default function MortalidadView() {
             </section>
           </main>
           <EstadisticasMortalidad registros={registros} />
-          <footer className="mt-auto py-8 border-t border-slate-200 dark:border-border-dark text-center">
+          <footer className="mt-auto py-8 border-t border-slate-200 dark:border-slate-800 text-center">
             <section className="flex flex-col items-center gap-4">
               <section className="flex items-center gap-6 opacity-60">
                 <section className="flex flex-col items-center">

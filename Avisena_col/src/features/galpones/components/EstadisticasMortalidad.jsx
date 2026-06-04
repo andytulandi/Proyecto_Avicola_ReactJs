@@ -32,10 +32,10 @@ export default function EstadisticasMortalidad({ registros }) {
             <span className="material-icons text-red-500">trending_up</span>
           </section>
           <section>
-            <p className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">
+            <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">
               Mortalidad Total Mensual
             </p>
-            <section className="text-xl font-bold">
+            <section className="text-2xl font-bold">
               {total}
             </section>
           </section>
@@ -45,10 +45,10 @@ export default function EstadisticasMortalidad({ registros }) {
             <span className="material-icons text-amber-400">analytics</span>
           </section>
           <section>
-            <p className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">
+            <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">
               Causa Principal
             </p>
-            <section className="text-xl font-bold">
+            <section className="text-2xl font-bold">
               {causaPrincipal}
             </section>
           </section>
@@ -58,10 +58,10 @@ export default function EstadisticasMortalidad({ registros }) {
             <span className="material-icons text-[#11a331] text-secondary-teal">task_alt</span>
           </section>
           <section>
-            <p className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">
+            <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">
               Actas Generadas
             </p>
-            <section className="text-xl font-bold">
+            <section className="text-2xl font-bold">
               {actas}
             </section>
           </section>
@@ -71,10 +71,10 @@ export default function EstadisticasMortalidad({ registros }) {
             <span className="material-icons text-amber-500">warning</span>
           </section>
           <section>
-            <p className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">
+            <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">
               Tasa de Mortalidad
             </p>
-            <section className="text-xl font-bold">
+            <section className="text-2xl font-bold">
               {tasa}%
             </section>
           </section>
