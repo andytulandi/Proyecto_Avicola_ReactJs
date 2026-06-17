@@ -60,7 +60,7 @@ const OlvideContrasena3 = () => {
                 value={newPass}
                 onChange={(e) => setNewPass(e.target.value)}
                 placeholder="Contraseña nueva"
-                className="w-full bg-[#F3F4F6] text-gray-800 placeholder-gray-500 rounded-md px-4 py-2.5 outline-none focus:ring-1 focus:ring-[#39A900] transition-all text-sm text-center"
+                className="w-full bg-[#F3F4F6] text-gray-800 placeholder-gray-500 rounded-md px-4 py-2.5 outline-none focus:ring-1 focus:ring-[#1B7A0A] transition-all text-sm text-center"
               />
               <button
                 type="button"
@@ -86,7 +86,7 @@ const OlvideContrasena3 = () => {
                 value={confirmPass}
                 onChange={(e) => setConfirmPass(e.target.value)}
                 placeholder="Confirmación de contraseña"
-                className="w-full bg-[#F3F4F6] text-gray-800 placeholder-gray-500 rounded-md px-4 py-2.5 outline-none focus:ring-1 focus:ring-[#39A900] transition-all text-sm text-center"
+                className="w-full bg-[#F3F4F6] text-gray-800 placeholder-gray-500 rounded-md px-4 py-2.5 outline-none focus:ring-1 focus:ring-[#1B7A0A] transition-all text-sm text-center"
               />
               <button
                 type="button"
@@ -112,7 +112,7 @@ const OlvideContrasena3 = () => {
             <button
               type="submit"
               className="hover:brightness-95 text-white font-bold rounded-full px-10 py-1.5 shadow-sm transform transition-transform hover:scale-105 active:scale-95 text-[14px] tracking-wide"
-              style={{ backgroundColor: '#5DED34' }}
+              style={{ backgroundColor: '#1B7A0A' }}
             >
               CONFIRMAR CAMBIO
             </button>
@@ -145,7 +145,7 @@ const OlvideContrasena3 = () => {
           type="button"
           onClick={handleSalir}
           className="hover:brightness-95 text-white font-bold rounded-full px-8 py-2 shadow-sm transform transition-transform hover:scale-105 active:scale-95 text-[14px] tracking-wide"
-          style={{ backgroundColor: '#5DED34' }}
+          style={{ backgroundColor: '#1B7A0A' }}
         >
           SALIR
         </button>

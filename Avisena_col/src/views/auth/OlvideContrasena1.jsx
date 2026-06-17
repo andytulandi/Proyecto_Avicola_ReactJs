@@ -96,14 +96,14 @@ const OlvideContraseña1 = () => {
             <button
               type="submit"
               style={{
-                backgroundColor: '#39A900',
+                backgroundColor: '#1B7A0A',
                 color: '#ffffff',
                 fontWeight: 'bold',
                 borderRadius: '9999px',
                 padding: '12px 55px',
                 border: 'none',
                 cursor: 'pointer',
-                boxShadow: '0 4px 12px rgba(57, 169, 0, 0.25)',
+                boxShadow: '0 4px 12px rgba(27, 122, 10, 0.25)',
                 fontSize: '14px',
                 letterSpacing: '0.5px'
               }}
@@ -139,14 +139,14 @@ const OlvideContraseña1 = () => {
           type="button"
           onClick={() => console.log('Saliendo...')}
           style={{
-            backgroundColor: '#39A900',
+            backgroundColor: '#1B7A0A',
             color: '#ffffff',
             fontWeight: 'bold',
             borderRadius: '9999px',
             padding: '10px 36px',
             border: 'none',
             cursor: 'pointer',
-            boxShadow: '0 4px 12px rgba(57, 169, 0, 0.25)',
+            boxShadow: '0 4px 12px rgba(27, 122, 10, 0.25)',
             fontSize: '14px',
             letterSpacing: '0.5px'
           }}

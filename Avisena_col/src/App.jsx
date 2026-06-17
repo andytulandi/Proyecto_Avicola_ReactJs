@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
+import DashboardLayout from './components/DashboardLayout';
 import DashboardHome from './views/dashboard/DashboardHome';
 import LoginView from './views/auth/LoginView';
 import RegisterView from './views/auth/RegisterView';
@@ -16,19 +17,24 @@ import './App.css';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/configuracion" replace />} />
-      
+      {/* Auth routes (NO sidebar layout) */}
+      <Route path="/login" element={<LoginView />} />
       <Route path="/register" element={<RegisterView />} />
       <Route path="/forgot-password" element={<OlvideContrasena1 />} />
       <Route path="/forgot-password-2" element={<OlvideContrasena2 />} />
       <Route path="/forgot-password-3" element={<OlvideContrasena3 />} />
-      <Route path="/dashboard" element={<DashboardHome />} />
-      <Route path="/galpones" element={<AdminGalponesView />} />
-      <Route path="/users" element={<UserManagementView />} />
-      <Route path="/users/register" element={<RegisterUserView />} />
-      <Route path="/profile" element={<UserProfileView />} />
-      <Route path="/configuracion" element={<ConfiguracionGeneral />} />
-      <Route path="/settings" element={<ConfiguracionGeneral />} />
+
+      {/* Dashboard routes (WITH sidebar layout) */}
+      <Route element={<DashboardLayout />}>
+        <Route path="/" element={<Navigate to="/configuracion" replace />} />
+        <Route path="/dashboard" element={<DashboardHome />} />
+        <Route path="/galpones" element={<AdminGalponesView />} />
+        <Route path="/users" element={<UserManagementView />} />
+        <Route path="/users/register" element={<RegisterUserView />} />
+        <Route path="/profile" element={<UserProfileView />} />
+        <Route path="/configuracion" element={<ConfiguracionGeneral />} />
+        <Route path="/settings" element={<ConfiguracionGeneral />} />
+      </Route>
     </Routes>
   );
 }

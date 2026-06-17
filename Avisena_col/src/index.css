@@ -8,7 +8,7 @@
     border-color: transparent;
 }
 .toggle-checkbox:checked + .toggle-label {
-    background-color: #39A900;
+    background-color: #1B7A0A;
 }
 .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
@@ -23,4 +23,17 @@
 .glass-card {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(8px);
+}
+
+/* Sidebar slide-in animation for mobile */
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+.animate-slide-in {
+    animation: slideIn 0.25s ease-out;
 }

@@ -61,7 +61,7 @@ const OlvideContrasena2 = () => {
               onChange={(e) => setCode(e.target.value)}
               maxLength={6}
               placeholder="Código de verificación"
-              className="w-full bg-[#F3F4F6] text-gray-800 placeholder-gray-500 rounded-md px-4 py-2.5 outline-none focus:ring-1 focus:ring-[#39A900] transition-all text-sm mb-6 text-center tracking-widest"
+              className="w-full bg-[#F3F4F6] text-gray-800 placeholder-gray-500 rounded-md px-4 py-2.5 outline-none focus:ring-1 focus:ring-[#1B7A0A] transition-all text-sm mb-6 text-center tracking-widest"
             />
 
             {error && <p className="text-red-500 text-xs absolute top-12">{error}</p>}
@@ -70,7 +70,7 @@ const OlvideContrasena2 = () => {
             <button
               type="submit"
               className="hover:brightness-95 text-white font-bold rounded-full px-10 py-1.5 shadow-sm transform transition-transform hover:scale-105 active:scale-95 text-[14px] tracking-wide"
-              style={{ backgroundColor: '#5DED34' }}
+              style={{ backgroundColor: '#1B7A0A' }}
             >
               ENVIAR
             </button>
@@ -103,7 +103,7 @@ const OlvideContrasena2 = () => {
           type="button"
           onClick={handleSalir}
           className="hover:brightness-95 text-white font-bold rounded-full px-8 py-2 shadow-sm transform transition-transform hover:scale-105 active:scale-95 text-[14px] tracking-wide"
-          style={{ backgroundColor: '#5DED34' }}
+          style={{ backgroundColor: '#1B7A0A' }}
         >
           SALIR
         </button>
