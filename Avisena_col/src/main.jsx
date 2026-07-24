@@ -1,12 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import ReportesView from './features/galpones/views/ReportesView'
 
+import GestionUsuariosView from './features/users/pages/GestionUsuariosView'
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ReportesView/>
+    <GestionUsuariosView/>
   </StrictMode>,
 )

@@ -1,24 +1,50 @@
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import FiltrosGestionUsuarios from "../components/FiltrosGestionUsuarios";
 import FormGestionUsuarios from "../components/FormGestionUsuarios";
-import TablaGestionUsuarios from '../components/TablaGestionUsuarios';
+import TablaGestionUsuarios from "../components/TablaGestionUsuarios";
+import RolesGestionUsuarios from "../components/RolesGestionUsuarios";
+import ModalEditarUsuario from "../components/ModalEditarUsuario";
+import ModalEliminarUsuario from "../components/ModalEliminarUsuario";
 
 export default function GestionUsuariosView() {
+  const [usuarios, setUsuarios] = useState([]);
+  const [usuariosFiltrados, setUsuariosFiltrados] = useState([]);
+  const [roles, setRoles] = useState([
+    "Instructor lider",
+    "Instructor investigador",
+    "Aprendiz de contrato",
+  ]);
+  const [modalEditarAbierto, setModalEditarAbierto] = useState(false);
+  const [usuarioEditar, setUsuarioEditar] = useState(null);
+  const [modalEliminarAbierto, setModalEliminarAbierto] = useState(false);
+  const [usuarioEliminar, setUsuarioEliminar] = useState(null);
+  const [mostrarToast, setMostrarToast] = useState(false);
+  const [mensajeToast, setMensajeToast] = useState("");
 
-    const [usuarios, setUsuarios] = useState([]);
-    const [usuariosFiltrados, setUsuariosFiltrados] = useState([]);
-  
-    useEffect(() => {
-      const datos = JSON.parse(localStorage.getItem("usuarios")) || [];
-      setUsuarios(datos);
-      setUsuariosFiltrados(datos);
-    }, []);
+  function mostrarMensaje(mensaje) {
+    setMensajeToast(mensaje);
+    setMostrarToast(true);
 
-    const total = usuarios.length;
-    const activos = usuarios.filter((u) => u.estado === "ACTIVO").length;
-    const inactivos = usuarios.filter((u) => u.estado === "INACTIVO").length;
-    
+    setTimeout(() => {
+      setMostrarToast(false);
+    }, 3000);
+  }
+
+  useEffect(() => {
+    const datos = JSON.parse(localStorage.getItem("usuarios")) || [];
+    setUsuarios(datos);
+    setUsuariosFiltrados(datos);
+    const rolesGuardados = JSON.parse(localStorage.getItem("roles"));
+
+    if (rolesGuardados) {
+      setRoles(rolesGuardados);
+    }
+  }, []);
+
+  const total = usuarios.length;
+  const activos = usuarios.filter((u) => u.estado === "ACTIVO").length;
+  const inactivos = usuarios.filter((u) => u.estado === "INACTIVO").length;
+
   return (
     <>
       <section className="bg-[#f6f7f8] dark:bg-[#141d1e] font-sans text-slate-900 dark:text-slate-100 min-h-screen">
@@ -26,41 +52,70 @@ export default function GestionUsuariosView() {
           <main className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <section className="flex flex-wrap justify-between items-end gap-4 mb-8">
               <section className="flex flex-col gap-1">
-                <h1 className="text-slate-900 dark:text-white text-5xl font-black leading-tight tracking-tight">Gestión de Usuarios</h1>
+                <h1 className="text-slate-900 dark:text-white text-3xl font-bold leading-tight tracking-tight">
+                  Gestión de Usuarios
+                </h1>
                 <p className="text-slate-500 dark:text-slate-400 text-lg font-normal">
                   Administra el acceso al sistema, los roles y los datos del
                   personal encargado de las operaciones avícolas
                 </p>
               </section>
-              <FormGestionUsuarios
-                usuarios={usuarios}
-                setUsuarios={setUsuarios}
-                setUsuariosFiltrados={setUsuariosFiltrados}
-              />
+              <section className="flex flex-row w-1/6 justify-between">
+                <FormGestionUsuarios
+                  usuarios={usuarios}
+                  setUsuarios={setUsuarios}
+                  setUsuariosFiltrados={setUsuariosFiltrados}
+                  roles={roles}
+                  setRoles={setRoles}
+                  mostrarMensaje={mostrarMensaje}
+                />
+                <RolesGestionUsuarios roles={roles} setRoles={setRoles} />
+              </section>
             </section>
             <FiltrosGestionUsuarios
               usuarios={usuarios}
               setUsuariosFiltrados={setUsuariosFiltrados}
+              roles={roles}
             />
             <section className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
               <section className="overflow-x-auto @container">
                 <table className="font-size w-full text-center border-collapse">
-                  <thead className='bg-slate-50 dark:bg-background-dark/80 sticky top-0 text-center'>
+                  <thead className="bg-slate-50 dark:bg-background-dark/80 sticky top-0 text-center">
                     <tr>
-                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Nombre</th>
-                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">E-mail</th>
-                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Teléfono</th>
-                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Número de Documento</th>
-                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Rol</th>
-                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Residencia</th>
-                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Fecha de ingreso</th>
-                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-center">Acciones</th>
+                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                        Nombre
+                      </th>
+                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                        E-mail
+                      </th>
+                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                        Teléfono
+                      </th>
+                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                        Número de Documento
+                      </th>
+                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                        Rol
+                      </th>
+                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                        Residencia
+                      </th>
+                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                        Fecha de ingreso
+                      </th>
+                      <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-center">
+                        Acciones
+                      </th>
                     </tr>
                   </thead>
                   <TablaGestionUsuarios
                     usuarios={usuariosFiltrados}
                     setUsuarios={setUsuarios}
                     setUsuariosFiltrados={setUsuariosFiltrados}
+                    setModalEditarAbierto={setModalEditarAbierto}
+                    setUsuarioEditar={setUsuarioEditar}
+                    setModalEliminarAbierto={setModalEliminarAbierto}
+                    setUsuarioEliminar={setUsuarioEliminar}
                   />
                 </table>
               </section>
@@ -68,10 +123,14 @@ export default function GestionUsuariosView() {
             <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
               <section className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-center gap-4">
                 <section className="size-12 rounded-full bg-[#3b82f6]/10 flex items-center justify-center text-[#3b82f6]">
-                  <span className="material-symbols-outlined text-3xl">groups</span>
+                  <span className="material-symbols-outlined text-3xl">
+                    groups
+                  </span>
                 </section>
                 <section>
-                  <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">Total Usuarios</p>
+                  <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
+                    Total Usuarios
+                  </p>
                   <h3 className="text-2xl font-black text-slate-900 dark:text-white text-center">
                     {total}
                   </h3>
@@ -79,10 +138,14 @@ export default function GestionUsuariosView() {
               </section>
               <section className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-center gap-4">
                 <section className="size-12 rounded-full bg-[#22c55e]/10 flex items-center justify-center text-[#22c55e]">
-                  <span className="material-symbols-outlined text-3xl">person_check</span>
+                  <span className="material-symbols-outlined text-3xl">
+                    person_check
+                  </span>
                 </section>
                 <section>
-                  <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">Usuarios Activos</p>
+                  <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
+                    Usuarios Activos
+                  </p>
                   <h3 className="text-2xl font-black text-slate-900 dark:text-white text-center">
                     {activos}
                   </h3>
@@ -90,10 +153,14 @@ export default function GestionUsuariosView() {
               </section>
               <section className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-center gap-4">
                 <section className="size-12 rounded-full bg-[#fbbf24]/10 flex items-center justify-center text-[#fbbf24]">
-                  <span className="material-symbols-outlined text-3xl">person_off</span>
+                  <span className="material-symbols-outlined text-3xl">
+                    person_off
+                  </span>
                 </section>
                 <section>
-                  <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">Usuarios Inhabilitados</p>
+                  <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
+                    Usuarios Inhabilitados
+                  </p>
                   <h3 className="text-2xl font-black text-slate-900 dark:text-white text-center">
                     {inactivos}
                   </h3>
@@ -101,18 +168,33 @@ export default function GestionUsuariosView() {
               </section>
             </section>
           </main>
-          <footer className="mt-auto px-10 py-6 text-center border-t border-slate-200 dark:border-slate-800">
-            <section className="flex flex-col items-center gap-4">
-              <section className="flex items-center gap-6 opacity-60">
-                <section className="flex flex-col items-center">
-                  <span className="text-l">Sistema de Gestión Avicola</span>
-                </section>
-              </section>
-              <p className="text-l text-slate-500">© 2026 AVISENA COL</p>
-            </section>
-          </footer>
+          <ModalEditarUsuario
+            abierto={modalEditarAbierto}
+            cerrar={() => setModalEditarAbierto(false)}
+            usuario={usuarioEditar}
+            roles={roles}
+            usuarios={usuarios}
+            setUsuarios={setUsuarios}
+            setUsuariosFiltrados={setUsuariosFiltrados}
+            mostrarMensaje={mostrarMensaje}
+          />
+          <ModalEliminarUsuario
+            abierto={modalEliminarAbierto}
+            cerrar={() => setModalEliminarAbierto(false)}
+            usuario={usuarioEliminar}
+            usuarios={usuarios}
+            setUsuarios={setUsuarios}
+            setUsuariosFiltrados={setUsuariosFiltrados}
+            mostrarMensaje={mostrarMensaje}
+          />
         </section>
       </section>
+      {mostrarToast && (
+        <section className="fixed top-5 left-1/2 -translate-x-1/2 bg-green-500 text-white px-6 py-4 rounded-xl shadow-xl flex items-center gap-2 z-50">
+          <span className="material-symbols-outlined">check_circle</span>
+          {mensajeToast}
+        </section>
+      )}
     </>
   );
 }
