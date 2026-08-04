@@ -55,22 +55,7 @@ export default function TablaReportes({ datos, filtros }) {
     <>
       <section className="lg:col-span-7">
         <section className="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl shadow-sm overflow-hidden flex flex-col h-full">
-          <section className="p-2 border-b border-slate-200 dark:border-border-dark flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <section className="space-y-1 flex items-center">
-              <p className="text-lg text-on-surface-variant flex items-center gap-xs pr-4">
-                <span className="material-symbols-outlined text-[#49E619] p-3">
-                  filter_list
-                </span>
-                Filtros aplicados:
-              </p>
-              <p className="text-lg text-slate-500 p-2 border border-[#92ec77] rounded-4xl items-center gap-xs m-0 mr-3">
-                Tipo: {filtros.tipoReporte || "Seleccione..."}
-              </p>
-
-              <p className="text-lg text-slate-500 p-2 border border-[#92ec77] rounded-4xl items-center gap-xs pr-4">
-                Galpón: {filtros.galpon || "Seleccione..."}
-              </p>
-            </section>
+          <section className="p-2 border-b border-slate-200 dark:border-border-dark flex flex-col sm:flex-row sm:items-center justify-end gap-4">
             <section className="flex items-center gap-md">
               <section className="flex items-center gap-xs">
                 <button
