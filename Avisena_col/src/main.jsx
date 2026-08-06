@@ -9,7 +9,7 @@ import ReportesView from './features/galpones/views/ReportesView'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <MortalidadView/>
     <GestionUsuariosView/>
+    <MortalidadView/>
   </StrictMode>,
 )

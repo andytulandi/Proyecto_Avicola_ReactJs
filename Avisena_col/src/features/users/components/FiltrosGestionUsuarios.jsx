@@ -4,6 +4,7 @@ export default function FiltrosGestionUsuarios({
   usuarios,
   setUsuariosFiltrados,
   roles,
+  setPaginaActual,
 }) {
   const [filtroRol, setFiltroRol] = useState("");
   const [filtroDocumento, setFiltroDocumento] = useState("");
@@ -19,6 +20,7 @@ export default function FiltrosGestionUsuarios({
     });
 
     setUsuariosFiltrados(filtrados);
+    setPaginaActual(1);
   }
 
   return (

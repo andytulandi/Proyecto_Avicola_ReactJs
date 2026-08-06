@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-export default function RolesGestionUsuarios({ roles, setRoles }) {
+export default function RolesGestionUsuarios({
+  roles,
+  setRoles,
+  usuarios,
+  setUsuarios,
+  setUsuariosFiltrados,
+}) {
   const [modalAbierto, setModalAbierto] = useState(false);
   const [nuevoRol, setNuevoRol] = useState("");
   const [rolEditando, setRolEditando] = useState(null);
@@ -18,7 +24,18 @@ export default function RolesGestionUsuarios({ roles, setRoles }) {
   const agregarRol = () => {
     if (!nuevoRol.trim()) return;
 
-    if (roles.includes(nuevoRol.trim())) {
+    if (nombreEditado.trim() === rolViejo) {
+      setRolEditando(null);
+      setNombreEditado("");
+      return;
+    }
+    if (
+      roles.some(
+        (rol) =>
+          rol.toLowerCase() === nombreEditado.trim().toLowerCase() &&
+          rol !== rolViejo,
+      )
+    ) {
       alert("Ese rol ya existe");
       return;
     }
@@ -53,6 +70,17 @@ export default function RolesGestionUsuarios({ roles, setRoles }) {
     const nuevosRoles = roles.map((rol) =>
       rol === rolViejo ? nombreEditado.trim() : rol,
     );
+
+    const usuariosActualizados = usuarios.map((usuario) =>
+      usuario.rol === rolViejo
+        ? { ...usuario, rol: nombreEditado.trim() }
+        : usuario,
+    );
+
+    setUsuarios(usuariosActualizados);
+    setUsuariosFiltrados(usuariosActualizados);
+
+    localStorage.setItem("usuarios", JSON.stringify(usuariosActualizados));
 
     setRoles(nuevosRoles);
     localStorage.setItem("roles", JSON.stringify(nuevosRoles));

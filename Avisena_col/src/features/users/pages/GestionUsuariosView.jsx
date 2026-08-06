@@ -9,6 +9,7 @@ import ModalEliminarUsuario from "../components/ModalEliminarUsuario";
 export default function GestionUsuariosView() {
   const [usuarios, setUsuarios] = useState([]);
   const [usuariosFiltrados, setUsuariosFiltrados] = useState([]);
+
   const [roles, setRoles] = useState([
     "Instructor lider",
     "Instructor investigador",
@@ -20,6 +21,19 @@ export default function GestionUsuariosView() {
   const [usuarioEliminar, setUsuarioEliminar] = useState(null);
   const [mostrarToast, setMostrarToast] = useState(false);
   const [mensajeToast, setMensajeToast] = useState("");
+
+  const [paginaActual, setPaginaActual] = useState(1);
+  const usuariosPorPagina = 5;
+  const ultimoUsuario = paginaActual * usuariosPorPagina;
+  const primerUsuario = ultimoUsuario - usuariosPorPagina;
+  const usuariosOrdenados = [...usuariosFiltrados].sort(
+    (a, b) => new Date(b.fecha) - new Date(a.fecha),
+  );
+  const usuariosPaginados = usuariosOrdenados.slice(
+    primerUsuario,
+    ultimoUsuario,
+  );
+  const totalPaginas = Math.ceil(usuariosOrdenados.length / usuariosPorPagina);
 
   function mostrarMensaje(mensaje) {
     setMensajeToast(mensaje);
@@ -68,14 +82,22 @@ export default function GestionUsuariosView() {
                   roles={roles}
                   setRoles={setRoles}
                   mostrarMensaje={mostrarMensaje}
+                  setPaginaActual={setPaginaActual}
                 />
-                <RolesGestionUsuarios roles={roles} setRoles={setRoles} />
+                <RolesGestionUsuarios
+                  roles={roles}
+                  setRoles={setRoles}
+                  usuarios={usuarios}
+                  setUsuarios={setUsuarios}
+                  setUsuariosFiltrados={setUsuariosFiltrados}
+                />
               </section>
             </section>
             <FiltrosGestionUsuarios
               usuarios={usuarios}
               setUsuariosFiltrados={setUsuariosFiltrados}
               roles={roles}
+              setPaginaActual={setPaginaActual}
             />
             <section className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
               <section className="overflow-x-auto @container">
@@ -109,16 +131,60 @@ export default function GestionUsuariosView() {
                     </tr>
                   </thead>
                   <TablaGestionUsuarios
-                    usuarios={usuariosFiltrados}
+                    usuarios={usuariosPaginados}
                     setUsuarios={setUsuarios}
                     setUsuariosFiltrados={setUsuariosFiltrados}
                     setModalEditarAbierto={setModalEditarAbierto}
                     setUsuarioEditar={setUsuarioEditar}
                     setModalEliminarAbierto={setModalEliminarAbierto}
                     setUsuarioEliminar={setUsuarioEliminar}
+                    usuariosCompletos={usuarios}
                   />
                 </table>
               </section>
+              {usuariosFiltrados.length > 0 && (
+                <section className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 border-t border-slate-200 dark:border-border-dark">
+                  <p className="text-sm text-slate-500">
+                    Mostrando {primerUsuario + 1} a{" "}
+                    {Math.min(ultimoUsuario, usuariosFiltrados.length)} de{" "}
+                    {usuariosFiltrados.length} usuarios
+                  </p>
+
+                  <section className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setPaginaActual((pagina) => Math.max(pagina - 1, 1))
+                      }
+                      disabled={paginaActual === 1}
+                      className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      <span className="material-symbols-outlined">
+                        chevron_left
+                      </span>
+                    </button>
+
+                    <span className="px-3 text-sm font-semibold text-slate-700">
+                      Página {paginaActual} de {totalPaginas}
+                    </span>
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setPaginaActual((pagina) =>
+                          Math.min(pagina + 1, totalPaginas),
+                        )
+                      }
+                      disabled={paginaActual === totalPaginas}
+                      className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      <span className="material-symbols-outlined">
+                        chevron_right
+                      </span>
+                    </button>
+                  </section>
+                </section>
+              )}
             </section>
             <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
               <section className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-center gap-4">

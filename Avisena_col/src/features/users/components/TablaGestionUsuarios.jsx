@@ -1,5 +1,6 @@
 export default function TablaGestionUsuarios({
   usuarios,
+  usuariosCompletos,
   setUsuarios,
   setUsuariosFiltrados,
   setModalEditarAbierto,
@@ -17,23 +18,31 @@ export default function TablaGestionUsuarios({
   }
 
   function habilitarUsuario(id) {
-    const nuevosUsuarios = usuarios.map((u) =>
+    const nuevosUsuarios = usuariosCompletos.map((u) =>
       u.id === id ? { ...u, estado: "ACTIVO" } : u,
     );
 
     setUsuarios(nuevosUsuarios);
-    setUsuariosFiltrados(nuevosUsuarios);
+    setUsuariosFiltrados((usuariosActuales) =>
+      usuariosActuales.map((u) =>
+        u.id === id ? { ...u, estado: "ACTIVO" } : u,
+      ),
+    );
 
     localStorage.setItem("usuarios", JSON.stringify(nuevosUsuarios));
   }
 
   function deshabilitarUsuario(id) {
-    const nuevosUsuarios = usuarios.map((u) =>
+    const nuevosUsuarios = usuariosCompletos.map((u) =>
       u.id === id ? { ...u, estado: "INACTIVO" } : u,
     );
 
     setUsuarios(nuevosUsuarios);
-    setUsuariosFiltrados(nuevosUsuarios);
+    setUsuariosFiltrados((usuariosActuales) =>
+      usuariosActuales.map((u) =>
+        u.id === id ? { ...u, estado: "INACTIVO" } : u,
+      ),
+    );
 
     localStorage.setItem("usuarios", JSON.stringify(nuevosUsuarios));
   }
